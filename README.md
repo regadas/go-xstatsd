@@ -18,7 +18,10 @@ s.Timing("foobar", 16)
 
 ### Bulk example ###
 ```go
-import "github.com/regadas/go-xstatsd"
+import (
+    "net"
+    "github.com/regadas/go-xstatsd"
+)
 
 s := statsd.New("127.0.0.1:8125", "some.metric.prefix")
 
@@ -28,4 +31,4 @@ s.Client.WithConnection(func(conn *net.Conn) {
 	s.IncrementRaw(conn, "bar")
 })
 ```
-	
+
