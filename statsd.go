@@ -31,7 +31,7 @@ func (client *StatsdClient) Connection() (conn net.Conn, err error) {
 	return net.DialUDP("udp", nil, client.Addr)
 }
 
-func (client *StatsdClient) withConnection(fn func(conn *net.Conn)) {
+func (client *StatsdClient) WithConnection(fn func(conn *net.Conn)) {
 	conn, err := client.Connection()
 	if err != nil {
 		log.Println(err)
@@ -47,7 +47,7 @@ func (s *Statsd) prefixStat(stat string) string {
 }
 
 func (s *Statsd) Timing(stat string, time int64) {
-	s.Client.withConnection(func(conn *net.Conn) {
+	s.Client.WithConnection(func(conn *net.Conn) {
 		s.TimingRaw(conn, stat, time)
 	})
 }
@@ -59,7 +59,7 @@ func (s *Statsd) TimingRaw(conn *net.Conn, stat string, time int64) {
 }
 
 func (s *Statsd) TimingWithSampleRate(stat string, time int64, sampleRate float32) {
-	s.Client.withConnection(func(conn *net.Conn) {
+	s.Client.WithConnection(func(conn *net.Conn) {
 		s.TimingWithSampleRateRaw(conn, stat, time, sampleRate)
 	})
 }
@@ -71,7 +71,7 @@ func (s *Statsd) TimingWithSampleRateRaw(conn *net.Conn, stat string, time int64
 }
 
 func (s *Statsd) Increment(stat string) {
-	s.Client.withConnection(func(conn *net.Conn) {
+	s.Client.WithConnection(func(conn *net.Conn) {
 		s.IncrementRaw(conn, stat)
 	})
 }
@@ -82,7 +82,7 @@ func (s *Statsd) IncrementRaw(conn *net.Conn, stat string) {
 }
 
 func (s *Statsd) IncrementWithSampling(stat string, sampleRate float32) {
-	s.Client.withConnection(func(conn *net.Conn) {
+	s.Client.WithConnection(func(conn *net.Conn) {
 		s.IncrementWithSamplingRaw(conn, stat, sampleRate)
 	})
 }
@@ -93,7 +93,7 @@ func (s *Statsd) IncrementWithSamplingRaw(conn *net.Conn, stat string, sampleRat
 }
 
 func (s *Statsd) Decrement(stat string) {
-	s.Client.withConnection(func(conn *net.Conn) {
+	s.Client.WithConnection(func(conn *net.Conn) {
 		s.DecrementRaw(conn, stat)
 	})
 }
@@ -104,7 +104,7 @@ func (s *Statsd) DecrementRaw(conn *net.Conn, stat string) {
 }
 
 func (s *Statsd) DecrementWithSampling(stat string, sampleRate float32) {
-	s.Client.withConnection(func(conn *net.Conn) {
+	s.Client.WithConnection(func(conn *net.Conn) {
 		s.DecrementWithSamplingRaw(conn, stat, sampleRate)
 	})
 }
