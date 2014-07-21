@@ -1,6 +1,6 @@
 ## go-xstatsd ##
 
-This is a very simple/samll statstd client that can also allow sending stats in bulk.
+This is a very simple/small statsd client that can also allow sending stats in bulk.
 
 **Disclaimer**
 
