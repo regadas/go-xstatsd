@@ -1,3 +1,4 @@
+[![GoDoc](https://godoc.org/github.com/golang/gddo?status.svg)](https://godoc.org/github.com/regadas/go-xstatsd)
 ## go-xstatsd ##
 
 This is a very simple/small statsd client that can also allow sending stats in bulk.
